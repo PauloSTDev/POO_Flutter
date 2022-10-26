@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:poo_flutter/src/app.dart';
+import 'package:poo_flutter/widgets/drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,6 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text("POO Flutter"),
       ),
+      drawer: DrawerNavigation(),
       floatingActionButton: FloatingActionButton(onPressed: () {}, child: Icon(Icons.add)),
     );
   }
