@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:poo_flutter/screens/home_screen.dart";
 
 class DrawerNavigation extends StatefulWidget {
   const DrawerNavigation({Key? key}) : super(key: key);
@@ -12,8 +13,8 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        children: const [
-          UserAccountsDrawerHeader(
+        children: [
+          const UserAccountsDrawerHeader(
             accountName: Text("Paulo Santos"),
             accountEmail: Text("paulo.santos@gmail.com"),
             currentAccountPicture: CircleAvatar(
@@ -22,7 +23,14 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
             decoration: BoxDecoration(
               color: Colors.red
             ),
-          )
+          ),
+          ListTile(
+            title: const Text("Home"),
+            leading: const Icon(Icons.home),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeScreen()));
+            },
+          ),
         ],
       ),
     );
