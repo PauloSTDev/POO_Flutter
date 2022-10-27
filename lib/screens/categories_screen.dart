@@ -12,7 +12,32 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   _showFormInDialog(BuildContext context) {
     return showDialog(context: context, builder: (param) {
-      return const AlertDialog(title: Text("Category form"),);
+      return AlertDialog(
+        actions: [
+          TextButton(onPressed: () {}, child: Text("Save")),
+          TextButton(onPressed: () {}, child: Text("Cancel")),
+
+        ],
+        title: const Text("Category form"),
+        content: SingleChildScrollView(
+          child: Column(
+            children: const [
+              TextField(
+                decoration: InputDecoration(
+                  labelText: "Category name",
+                  hintText: "Write Category name",
+                ),
+              ),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: "Category description",
+                  hintText: "Write Category description",
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
     }, barrierDismissible: true);
   }
   @override
