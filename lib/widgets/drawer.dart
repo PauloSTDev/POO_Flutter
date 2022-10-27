@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:poo_flutter/screens/categories_screen.dart";
 import "package:poo_flutter/screens/home_screen.dart";
 
 class DrawerNavigation extends StatefulWidget {
@@ -29,6 +30,13 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
             leading: const Icon(Icons.home),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeScreen()));
+            },
+          ),
+          ListTile(
+            title: const Text("Categories"),
+            leading: const Icon(Icons.category),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CategoriesScreen()));
             },
           ),
         ],
