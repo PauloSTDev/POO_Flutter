@@ -10,26 +10,39 @@ class CategoriesScreen extends StatefulWidget {
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
 
+  final _categoryNameController = TextEditingController();
+  final _categoryDescriptionController = TextEditingController();
+
   _showFormInDialog(BuildContext context) {
     return showDialog(context: context, builder: (param) {
       return AlertDialog(
         actions: [
-          TextButton(onPressed: () {}, child: Text("Save")),
-          TextButton(onPressed: () {}, child: Text("Cancel")),
+          TextButton(
+              onPressed: () {
+                print("Category Name ${_categoryDescriptionController.text} : Category Description ${_categoryNameController.text}");
+              },
+              child: const Text("Save")),
+          TextButton(
+              onPressed: () {
+                print("Cancel");
+              },
+              child: const Text("Cancel")),
 
         ],
         title: const Text("Category form"),
         content: SingleChildScrollView(
           child: Column(
-            children: const [
+            children: [
               TextField(
-                decoration: InputDecoration(
+                controller: _categoryNameController,
+                decoration: const InputDecoration(
                   labelText: "Category name",
                   hintText: "Write Category name",
                 ),
               ),
               TextField(
-                decoration: InputDecoration(
+                controller: _categoryDescriptionController,
+                decoration: const InputDecoration(
                   labelText: "Category description",
                   hintText: "Write Category description",
                 ),
@@ -40,6 +53,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       );
     }, barrierDismissible: true);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
