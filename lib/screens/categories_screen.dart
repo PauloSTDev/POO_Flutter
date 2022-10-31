@@ -1,7 +1,8 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:poo_flutter/models/category.dart';
+import 'package:poo_flutter/repositories/connection_db.dart';
 import 'package:poo_flutter/screens/home_screen.dart';
-import '../services/category_service.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({Key? key}) : super(key: key);
@@ -14,18 +15,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   final _categoryNameController = TextEditingController();
   final _categoryDescriptionController = TextEditingController();
-  final _category = Category();
-  final _categoryService = CategoryService();
 
   _showFormInDialog(BuildContext context) {
     return showDialog(context: context, builder: (param) {
       return AlertDialog(
         actions: [
           TextButton(
-              onPressed: () {
-                _category.name = _categoryNameController.text;
-                _category.description = _categoryDescriptionController.text;
-                _categoryService.saveCategory(_category);
+              onPressed: () async {
+                final category = Category(Random().nextInt(100), _categoryNameController.text, _categoryDescriptionController.text);
+                print(category);
+                save(category);
               },
               child: const Text("Save")),
           TextButton(
