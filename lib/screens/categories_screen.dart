@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:poo_flutter/models/category.dart';
 import 'package:poo_flutter/screens/home_screen.dart';
+import '../services/category_service.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({Key? key}) : super(key: key);
@@ -12,6 +14,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   final _categoryNameController = TextEditingController();
   final _categoryDescriptionController = TextEditingController();
+  final _category = Category();
+  final _categoryService = CategoryService();
 
   _showFormInDialog(BuildContext context) {
     return showDialog(context: context, builder: (param) {
@@ -19,7 +23,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         actions: [
           TextButton(
               onPressed: () {
-                print("Category Name ${_categoryDescriptionController.text} : Category Description ${_categoryNameController.text}");
+                _category.name = _categoryNameController.text;
+                _category.description = _categoryDescriptionController.text;
+                _categoryService.saveCategory(_category);
               },
               child: const Text("Save")),
           TextButton(
