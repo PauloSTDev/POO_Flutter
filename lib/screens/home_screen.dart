@@ -15,11 +15,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("POO Flutter"),
+        title: const Text("POO Flutter"),
       ),
-      drawer: DrawerNavigation(),
+      drawer: const DrawerNavigation(),
       body: FutureBuilder<List<Category>> (
-        initialData: [],
+        initialData: const [],
         future: findAll(),
         builder: (context, snapshot) {
           final List<Category>? categories = snapshot.data;
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         },
 
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {}, child: Icon(Icons.add)),
+      floatingActionButton: FloatingActionButton(onPressed: () {}, child: const Icon(Icons.add)),
     );
 
   }
@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
 class _CategoryItem extends StatelessWidget {
   final Category category;
 
-  _CategoryItem(this.category);
+  const _CategoryItem(this.category);
 
   @override
   Widget build(BuildContext context) {

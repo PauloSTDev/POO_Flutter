@@ -10,7 +10,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red
       ),
-      home: HomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }
