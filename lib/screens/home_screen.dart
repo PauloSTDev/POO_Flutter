@@ -51,15 +51,17 @@ class _CategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        leading: const Icon(Icons.category),
+        trailing: IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
         title: Text(
           category.name,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 24.0,
           ),
         ),
         subtitle: Text(
           category.description.toString(),
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16.0,
           ),
         ),
