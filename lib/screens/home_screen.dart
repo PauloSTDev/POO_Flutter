@@ -69,6 +69,8 @@ class _CategoryItem extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         deleteCategory(category);
+
+                        Navigator.of(context).pop(context);
                       },
                       child: const Text("Confirm"),
                     ),
