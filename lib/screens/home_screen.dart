@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text("POO Flutter"),
       ),
       drawer: const DrawerNavigation(),
-      body: FutureBuilder<List<Category>> (
+      body: FutureBuilder<List<Category>>(
         initialData: const [],
         future: findAll(),
         builder: (context, snapshot) {
@@ -29,19 +29,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 final Category category = categories[index];
                 return _CategoryItem(category);
               }
-              return const Center(child: Text("Erro desconhecido"),);
+              return const Center(
+                child: Text("Erro desconhecido"),
+              );
             },
             itemCount: categories?.length,
           );
         },
-
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {}, child: const Icon(Icons.add)),
+      floatingActionButton:
+          FloatingActionButton(onPressed: () {}, child: const Icon(Icons.add)),
     );
-
   }
-
 }
+
 class _CategoryItem extends StatelessWidget {
   final Category category;
 
@@ -52,7 +53,31 @@ class _CategoryItem extends StatelessWidget {
     return Card(
       child: ListTile(
         leading: const Icon(Icons.category),
-        trailing: IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
+        trailing: IconButton(
+            onPressed: () {
+              print("Aham");
+              showDialog(context: context, builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text("Confirm the delete?"),
+                  actions: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(context);
+                      },
+                      child: const Text("Cancel"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        deleteCategory(category);
+                      },
+                      child: const Text("Confirm"),
+                    ),
+                  ],
+                );
+              });
+
+            },
+            icon: const Icon(Icons.delete)),
         title: Text(
           category.name,
           style: const TextStyle(
