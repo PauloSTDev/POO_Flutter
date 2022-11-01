@@ -44,3 +44,10 @@ Future<List<Category>> findAll() {
     });
   });
 }
+
+
+Future<int> deleteCategory(Category category) async{
+  return connectionDB().then((db) {
+    return db.delete("categories", where: "id = ${category.id}");
+  });
+}
