@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:poo_flutter/models/category.dart';
-import 'package:poo_flutter/repositories/connection_db.dart';
+import 'package:poo_flutter/repositories/category_service.dart';
 import 'package:poo_flutter/screens/home_screen.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               onPressed: () async {
                 final category = Category(Random().nextInt(100), _categoryNameController.text, _categoryDescriptionController.text);
                 print(category);
-                save(category);
+                CategoryService().save(category);
                 Navigator.of(context).pop(context);
               },
               child: const Text("Save")),
@@ -79,7 +79,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       ),
       body: FutureBuilder<List<Category>>(
         initialData: const [],
-        future: findAll(),
+        future: CategoryService().findAll(),
         builder: (context, snapshot) {
           final List<Category>? categories = snapshot.data;
           return ListView.builder(
@@ -132,7 +132,7 @@ class _CategoryItem extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        deleteCategory(category);
+                        CategoryService().deleteCategory(category);
 
                         Navigator.of(context).pop(context);
                       },
