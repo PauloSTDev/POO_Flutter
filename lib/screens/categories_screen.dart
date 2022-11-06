@@ -116,7 +116,7 @@ class _CategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        leading: const Icon(Icons.category),
+        onLongPress: () {print("Teste");},
         trailing: IconButton(
             onPressed: () {
               print("Aham");

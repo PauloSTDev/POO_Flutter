@@ -40,4 +40,9 @@ class CategoryService {
     });
   }
 
+  update(id){
+
+  }
+
+
 }
