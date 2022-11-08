@@ -28,6 +28,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 print(category);
                 CategoryService().save(category);
                 Navigator.of(context).pop(context);
+                setState(() {
+
+                });
               },
               child: const Text("Save")),
           TextButton(
@@ -86,7 +89,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           final List<Category>? categories = snapshot.data;
           return ListView.builder(
             itemBuilder: (context, index) {
-              if (categories != null && categories.isNotEmpty) {
+              if (categories.isNotEmpty) {
                 final Category category = categories[index];
                 return _CategoryItem(category, category.name, category.description);
               }
@@ -94,7 +97,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 child: Text("Erro desconhecido"),
               );
             },
-            itemCount: categories?.length,
+            itemCount: categories!.length,
           );
         },
       ),
@@ -113,8 +116,6 @@ class _CategoryItem extends StatelessWidget {
   final Category category;
   final String name;
   final String description;
-
-
   const _CategoryItem(this.category, this.name, this.description);
 
   @override
@@ -131,11 +132,10 @@ class _CategoryItem extends StatelessWidget {
               actions: [
                 TextButton(
                     onPressed: () async {
-
                       final updatedCategory = Category(category.id, categoryNameController.text, categoryDescriptionController.text);
-                      print(updatedCategory);
-                      CategoryService().update(updatedCategory);
-                      Navigator.of(context).pop(context);
+                      await CategoryService().update(updatedCategory)
+                      .then((value) => Navigator.of(context).pop(context));
+
                     },
                     child: const Text("Save")),
                 TextButton(
@@ -184,7 +184,6 @@ class _CategoryItem extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         CategoryService().deleteCategory(category);
-
                         Navigator.of(context).pop(context);
                       },
                       child: const Text("Confirm"),
