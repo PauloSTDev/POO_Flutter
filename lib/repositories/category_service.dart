@@ -2,13 +2,12 @@ import 'package:poo_flutter/models/category.dart';
 import 'package:poo_flutter/repositories/connection_db.dart';
 
 class CategoryService {
-
   Future<int> save(Category category) {
     return connectionDB().then((db) {
       final Map<String, dynamic> categoryMap = {
         'id': category.id,
-        'name' : category.name,
-        'description' : category.description
+        'name': category.name,
+        'description': category.description
       };
 
       print(categoryMap);
@@ -33,16 +32,25 @@ class CategoryService {
     });
   }
 
-
-  Future<int> deleteCategory(Category category) async{
+  Future<int> deleteCategory(Category category) async {
     return connectionDB().then((db) {
       return db.delete("categories", where: "id = ${category.id}");
     });
   }
 
-  update(id){
-
+  Future<int>update(category) async {
+    return await connectionDB().then((db) {
+      final Map<String, dynamic> categoryMap = {
+        'id': category.id,
+        'name': category.name,
+        'description': category.description
+      };
+      return db.update(
+          "categories",
+          categoryMap,
+          where: "id = ?",
+        whereArgs: [category.id]
+      );
+    });
   }
-
-
 }
