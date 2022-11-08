@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:poo_flutter/models/category.dart';
@@ -13,16 +15,16 @@ class CategoriesScreen extends StatefulWidget {
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
 
-  final _categoryNameController = TextEditingController();
-  final _categoryDescriptionController = TextEditingController();
+  final categoryNameController = TextEditingController();
+  final categoryDescriptionController = TextEditingController();
 
-  _showFormInDialog(BuildContext context) {
+  showFormInDialog(BuildContext context) {
     return showDialog(context: context, builder: (param) {
       return AlertDialog(
         actions: [
           TextButton(
               onPressed: () async {
-                final category = Category(Random().nextInt(100), _categoryNameController.text, _categoryDescriptionController.text);
+                final category = Category(Random().nextInt(100), categoryNameController.text, categoryDescriptionController.text);
                 print(category);
                 CategoryService().save(category);
                 Navigator.of(context).pop(context);
@@ -40,14 +42,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           child: Column(
             children: [
               TextField(
-                controller: _categoryNameController,
+                controller: categoryNameController,
                 decoration: const InputDecoration(
                   labelText: "Category name",
                   hintText: "Write Category name",
                 ),
               ),
               TextField(
-                controller: _categoryDescriptionController,
+                controller: categoryDescriptionController,
                 decoration: const InputDecoration(
                   labelText: "Category description",
                   hintText: "Write Category description",
@@ -86,7 +88,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             itemBuilder: (context, index) {
               if (categories != null && categories.isNotEmpty) {
                 final Category category = categories[index];
-                return _CategoryItem(category);
+                return _CategoryItem(category, category.name, category.description);
               }
               return const Center(
                 child: Text("Erro desconhecido"),
@@ -98,7 +100,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _showFormInDialog(context);
+          showFormInDialog(context);
         },
         child: const Icon(Icons.add),
       ),
@@ -109,17 +111,66 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
 class _CategoryItem extends StatelessWidget {
   final Category category;
+  final String name;
+  final String description;
 
-  const _CategoryItem(this.category);
+
+  const _CategoryItem(this.category, this.name, this.description);
 
   @override
   Widget build(BuildContext context) {
+
+    final categoryNameController = TextEditingController();
+    final categoryDescriptionController = TextEditingController();
+
     return Card(
       child: ListTile(
-        onLongPress: () {print("Teste");},
+        onLongPress: () {
+          showDialog(context: context, builder: (param) {
+            return AlertDialog(
+              actions: [
+                TextButton(
+                    onPressed: () async {
+
+                      final updatedCategory = Category(category.id, categoryNameController.text, categoryDescriptionController.text);
+                      print(updatedCategory);
+                      CategoryService().update(updatedCategory);
+                      Navigator.of(context).pop(context);
+                    },
+                    child: const Text("Save")),
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(context);
+                    },
+                    child: const Text("Cancel")),
+
+              ],
+              title: const Text("Category form"),
+              content: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    TextField(
+                      controller: categoryNameController,
+                      decoration: InputDecoration(
+                        labelText: "Category name",
+                        hintText: name,
+                      ),
+                    ),
+                    TextField(
+                      controller: categoryDescriptionController,
+                      decoration: InputDecoration(
+                        labelText: "Category description",
+                        hintText: description,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }, barrierDismissible: true);
+        },
         trailing: IconButton(
             onPressed: () {
-              print("Aham");
               showDialog(context: context, builder: (BuildContext context) {
                 return AlertDialog(
                   title: const Text("Confirm the delete?"),
