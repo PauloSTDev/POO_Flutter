@@ -21,8 +21,8 @@ class CategoryEditScreen extends StatefulWidget {
 class _CategoryEditScreenState extends State<CategoryEditScreen> {
   @override
   Widget build(BuildContext context) {
-    final categoryNameController = TextEditingController();
-    final categoryDescriptionController = TextEditingController();
+    final categoryNameController = TextEditingController(text: widget.name);
+    final categoryDescriptionController = TextEditingController(text: widget.description);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Edit Screen"),
@@ -36,16 +36,14 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
             children: [
               TextField(
                 controller: categoryNameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: "Category name",
-                  hintText: widget.name,
                 ),
               ),
               TextField(
                 controller: categoryDescriptionController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: "Category description",
-                  hintText: widget.description,
                 ),
               ),
               Padding(
