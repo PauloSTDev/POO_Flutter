@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:poo_flutter/database/dao/category_service.dart';
 import 'package:poo_flutter/models/category.dart';
-import 'package:poo_flutter/repositories/category_service.dart';
 
 class CategoryEditScreen extends StatefulWidget {
   final Category category;

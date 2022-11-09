@@ -1,9 +1,7 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
-
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:poo_flutter/database/dao/category_service.dart';
 import 'package:poo_flutter/models/category.dart';
-import 'package:poo_flutter/repositories/category_service.dart';
 import 'package:poo_flutter/screens/category_edit_screen.dart';
 import 'package:poo_flutter/screens/home_screen.dart';
 
