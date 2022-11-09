@@ -1,5 +1,5 @@
+import 'package:poo_flutter/database/connection_db.dart';
 import 'package:poo_flutter/models/category.dart';
-import 'package:poo_flutter/repositories/connection_db.dart';
 
 class CategoryService {
   Future<int> save(Category category) {
