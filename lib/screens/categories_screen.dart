@@ -29,7 +29,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         categoryNameController.text,
                         categoryDescriptionController.text);
                     print(category);
-                    CategoryService().save(category).catchError(() =>
+                    CategoryService().save(category).catchError((onError) =>
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
                               content: Text("Erro ao tentar criar!",
