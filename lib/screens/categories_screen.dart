@@ -28,22 +28,15 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         Random().nextInt(100),
                         categoryNameController.text,
                         categoryDescriptionController.text);
-                    print(category);
-                    CategoryService().save(category).catchError((onError) =>
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                              content: Text("Erro ao tentar criar!",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 24)),
-                              duration: Duration(seconds: 5),
-                              backgroundColor: Colors.red,
-                            )))
-                            .then((value) => ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
-                                        content: Text(
-                                  "Create Realizado!",
-                                  textAlign: TextAlign.center,
-                                ))));
+                    CategoryService()
+                        .save(category)
+                        .catchError((onError) => showSnackBar("criar"))
+                        .then((value) => ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                                    content: Text(
+                              "Create Realizado!",
+                              textAlign: TextAlign.center,
+                            ))));
 
                     setState(() {
                       Navigator.of(context).pop(context);
@@ -126,9 +119,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                               name: category.name,
                               description: category.description),
                         ),
-                      ).then((value) => setState(() {
-                            print("Recarregando");
-                          }));
+                      ).then((value) => setState(() {}));
                     },
                     trailing: IconButton(
                         onPressed: () {
@@ -149,21 +140,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                         CategoryService()
                                             .deleteCategory(category)
                                             .catchError((onError) =>
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                        const SnackBar(
-                                                            content: Text(
-                                                              "Erro ao tentar deletar!",
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              style: TextStyle(
-                                                                  fontSize: 24),
-                                                            ),
-                                                            duration: Duration(
-                                                                seconds: 5),
-                                                            backgroundColor:
-                                                                Colors.red)))
+                                                showSnackBar("deletar"))
                                             .then((value) =>
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(
@@ -213,5 +190,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text("Erro ao tentar $message",
+          textAlign: TextAlign.center, style: const TextStyle(fontSize: 24)),
+      duration: const Duration(seconds: 5),
+      backgroundColor: Colors.red,
+    ));
   }
 }

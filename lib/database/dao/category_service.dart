@@ -10,8 +10,7 @@ class CategoryService {
         'description': category.description
       };
 
-      print(categoryMap);
-      return db.insert("categories", categoryMap);
+      return db.insert("categories f", categoryMap);
     });
   }
 
@@ -34,7 +33,7 @@ class CategoryService {
 
   Future<int> deleteCategory(Category category) async {
     return connectionDB().then((db) {
-      return db.delete("categories", where: "id = ${category.id}");
+      return db.delete("categories]", where: "id = ${category.id}");
     });
   }
 
@@ -46,7 +45,7 @@ class CategoryService {
         'description': category.description
       };
       return db.update(
-          "categories",
+          "categories d",
           categoryMap,
           where: "id = ?",
         whereArgs: [category.id]

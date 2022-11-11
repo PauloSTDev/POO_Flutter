@@ -64,27 +64,17 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                               widget.category.id,
                               categoryNameController.text,
                               categoryDescriptionController.text);
-                          try{
+                          try {
                             await CategoryService()
                                 .update(updatedCategory)
-                                .catchError((onError) =>
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
-                                  content: Text(
-                                    "Erro ao tentar editar!!!!",
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  duration: Duration(seconds: 10),
-                                  backgroundColor: Colors.red,
-                                )))
+                                .catchError((onError) => showSnackBar())
                                 .then((value) => ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                                content: Text(
-                                  "Update Realizado!",
-                                  textAlign: TextAlign.center,
-                                ))));
-                          }
-                          finally {
+                                        .showSnackBar(const SnackBar(
+                                            content: Text(
+                                      "Update Realizado!",
+                                      textAlign: TextAlign.center,
+                                    ))));
+                          } finally {
                             Navigator.of(context).pop(context);
                           }
                         },
@@ -97,5 +87,17 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
         ),
       ),
     );
+  }
+
+  showSnackBar() {
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text(
+        "Erro ao tentar editar!",
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 24),
+      ),
+      duration: Duration(seconds: 10),
+      backgroundColor: Colors.red,
+    ));
   }
 }
