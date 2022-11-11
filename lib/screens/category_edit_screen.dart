@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:poo_flutter/database/dao/category_service.dart';
 import 'package:poo_flutter/models/category.dart';
+import 'package:poo_flutter/widgets/show_snackbar.dart';
 
 class CategoryEditScreen extends StatefulWidget {
   final Category category;
@@ -19,6 +20,7 @@ class CategoryEditScreen extends StatefulWidget {
 }
 
 class _CategoryEditScreenState extends State<CategoryEditScreen> {
+
   @override
   Widget build(BuildContext context) {
     final categoryNameController = TextEditingController(text: widget.name);
@@ -67,7 +69,7 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                           try {
                             await CategoryService()
                                 .update(updatedCategory)
-                                .catchError((onError) => showSnackBar())
+                                .catchError((onError) => showSnackBar("editar", context))
                                 .then((value) => ScaffoldMessenger.of(context)
                                         .showSnackBar(const SnackBar(
                                             content: Text(
@@ -87,17 +89,5 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
         ),
       ),
     );
-  }
-
-  showSnackBar() {
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text(
-        "Erro ao tentar editar!",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 24),
-      ),
-      duration: Duration(seconds: 10),
-      backgroundColor: Colors.red,
-    ));
   }
 }

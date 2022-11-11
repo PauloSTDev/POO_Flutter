@@ -4,6 +4,7 @@ import 'package:poo_flutter/database/dao/category_service.dart';
 import 'package:poo_flutter/models/category.dart';
 import 'package:poo_flutter/screens/category_edit_screen.dart';
 import 'package:poo_flutter/screens/home_screen.dart';
+import 'package:poo_flutter/widgets/show_snackbar.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         categoryDescriptionController.text);
                     CategoryService()
                         .save(category)
-                        .catchError((onError) => showSnackBar("criar"))
+                        .catchError((onError) => showSnackBar("criar", context))
                         .then((value) => ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
                                     content: Text(
@@ -117,7 +118,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           builder: (context) => CategoryEditScreen(
                               category: category,
                               name: category.name,
-                              description: category.description),
+                              description: category.description,
+                          ),
                         ),
                       ).then((value) => setState(() {}));
                     },
@@ -140,7 +142,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                         CategoryService()
                                             .deleteCategory(category)
                                             .catchError((onError) =>
-                                                showSnackBar("deletar"))
+                                                showSnackBar("deletar", context))
                                             .then((value) =>
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(
@@ -190,14 +192,5 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         child: const Icon(Icons.add),
       ),
     );
-  }
-
-  showSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text("Erro ao tentar $message",
-          textAlign: TextAlign.center, style: const TextStyle(fontSize: 24)),
-      duration: const Duration(seconds: 5),
-      backgroundColor: Colors.red,
-    ));
   }
 }
