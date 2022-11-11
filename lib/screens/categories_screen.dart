@@ -29,9 +29,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         categoryNameController.text,
                         categoryDescriptionController.text);
                     print(category);
-                    CategoryService().save(category);
-                    Navigator.of(context).pop(context);
-                    setState(() {});
+                    CategoryService().save(category).then((value) => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Create Realizado!", textAlign: TextAlign.center,))));
+                    
+                    setState(() {
+                      Navigator.of(context).pop(context);
+                    });
                   },
                   child: const Text("Save")),
               TextButton(
@@ -77,7 +79,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           ),
           onPressed: () {
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const HomeScreen()));
+                MaterialPageRoute(builder: (context) => const HomeScreen())).then((value) => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Update Realizado!", textAlign: TextAlign.center,))));
           },
         ),
         elevation: 0.0,
@@ -125,6 +127,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                         CategoryService()
                                             .deleteCategory(category).then((value) => setState(() {
                                           Navigator.of(context).pop(context);
+                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Delete Realizado!", textAlign: TextAlign.center,)));
                                         }));
                                       },
                                       child: const Text("Confirm"),

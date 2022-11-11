@@ -27,7 +27,7 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
       appBar: AppBar(
         title: const Text("Edit Screen"),
         centerTitle: true,
-        actions: [],
+        actions: const [],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -65,7 +65,8 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                               categoryDescriptionController.text);
                           await CategoryService()
                               .update(updatedCategory)
-                              .then((value) => Navigator.of(context).pop(context));
+                              .then((value) => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Update Realizado!", textAlign: TextAlign.center,))));
+                              Navigator.of(context).pop(context);
                         },
                         child: const Text("Save")),
                   ],
