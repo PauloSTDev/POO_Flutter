@@ -22,7 +22,8 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
   @override
   Widget build(BuildContext context) {
     final categoryNameController = TextEditingController(text: widget.name);
-    final categoryDescriptionController = TextEditingController(text: widget.description);
+    final categoryDescriptionController =
+        TextEditingController(text: widget.description);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Edit Screen"),
@@ -52,10 +53,10 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop(context);
-                        },
-                        child: const Text("Cancel"),
+                      onPressed: () {
+                        Navigator.of(context).pop(context);
+                      },
+                      child: const Text("Cancel"),
                     ),
                     TextButton(
                         onPressed: () async {
@@ -63,10 +64,29 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                               widget.category.id,
                               categoryNameController.text,
                               categoryDescriptionController.text);
-                          await CategoryService()
-                              .update(updatedCategory)
-                              .then((value) => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Update Realizado!", textAlign: TextAlign.center,))));
-                              Navigator.of(context).pop(context);
+                          try{
+                            await CategoryService()
+                                .update(updatedCategory)
+                                .catchError((onError) =>
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text(
+                                    "Erro ao tentar editar!!!!",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  duration: Duration(seconds: 10),
+                                  backgroundColor: Colors.red,
+                                )))
+                                .then((value) => ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                                content: Text(
+                                  "Update Realizado!",
+                                  textAlign: TextAlign.center,
+                                ))));
+                          }
+                          finally {
+                            Navigator.of(context).pop(context);
+                          }
                         },
                         child: const Text("Save")),
                   ],

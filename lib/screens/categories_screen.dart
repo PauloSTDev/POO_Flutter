@@ -29,8 +29,22 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         categoryNameController.text,
                         categoryDescriptionController.text);
                     print(category);
-                    CategoryService().save(category).then((value) => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Create Realizado!", textAlign: TextAlign.center,))));
-                    
+                    CategoryService().save(category).catchError(() =>
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                              content: Text("Erro ao tentar criar!",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 24)),
+                              duration: Duration(seconds: 5),
+                              backgroundColor: Colors.red,
+                            )))
+                            .then((value) => ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                        content: Text(
+                                  "Create Realizado!",
+                                  textAlign: TextAlign.center,
+                                ))));
+
                     setState(() {
                       Navigator.of(context).pop(context);
                     });
@@ -78,8 +92,15 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const HomeScreen())).then((value) => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Update Realizado!", textAlign: TextAlign.center,))));
+            Navigator.of(context)
+                .push(
+                    MaterialPageRoute(builder: (context) => const HomeScreen()))
+                .then((value) =>
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text(
+                      "Update Realizado!",
+                      textAlign: TextAlign.center,
+                    ))));
           },
         ),
         elevation: 0.0,
@@ -103,10 +124,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           builder: (context) => CategoryEditScreen(
                               category: category,
                               name: category.name,
-                              description: category.description
-                          ),
+                              description: category.description),
                         ),
-                      ).then((value) => setState((){print("Recarregando");}));
+                      ).then((value) => setState(() {
+                            print("Recarregando");
+                          }));
                     },
                     trailing: IconButton(
                         onPressed: () {
@@ -125,10 +147,34 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                     ElevatedButton(
                                       onPressed: () {
                                         CategoryService()
-                                            .deleteCategory(category).then((value) => setState(() {
+                                            .deleteCategory(category)
+                                            .catchError((onError) =>
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                        const SnackBar(
+                                                            content: Text(
+                                                              "Erro ao tentar deletar!",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: TextStyle(
+                                                                  fontSize: 24),
+                                                            ),
+                                                            duration: Duration(
+                                                                seconds: 5),
+                                                            backgroundColor:
+                                                                Colors.red)))
+                                            .then((value) =>
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                        const SnackBar(
+                                                            content: Text(
+                                                  "Delete Realizado!",
+                                                  textAlign: TextAlign.center,
+                                                ))));
+                                        setState(() {
                                           Navigator.of(context).pop(context);
-                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Delete Realizado!", textAlign: TextAlign.center,)));
-                                        }));
+                                        });
                                       },
                                       child: const Text("Confirm"),
                                     ),
