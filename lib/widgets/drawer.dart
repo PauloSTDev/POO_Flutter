@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:poo_flutter/screens/categories_screen.dart";
 import "package:poo_flutter/screens/home_screen.dart";
+import "package:poo_flutter/screens/todo_screen.dart";
 
 class DrawerNavigation extends StatefulWidget {
   const DrawerNavigation({Key? key}) : super(key: key);
@@ -24,6 +25,13 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
             decoration: BoxDecoration(
               color: Colors.red
             ),
+          ),
+          ListTile(
+            title: const Text("Home"),
+            leading: const Icon(Icons.format_align_center),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TodoScreen()));
+            },
           ),
           ListTile(
             title: const Text("Home"),
