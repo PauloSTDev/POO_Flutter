@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:poo_flutter/screens/categories_screen.dart";
 import "package:poo_flutter/screens/home_screen.dart";
 import "package:poo_flutter/screens/todo_screen.dart";
+import "package:poo_flutter/themes/theme_colors.dart";
 
 class DrawerNavigation extends StatefulWidget {
   const DrawerNavigation({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
                 child: Icon(Icons.filter_list, color: Colors.white,),
               ),
             decoration: BoxDecoration(
-              color: Colors.red
+              color: ThemeColors.drawerHeaderColor,
             ),
           ),
           ListTile(
