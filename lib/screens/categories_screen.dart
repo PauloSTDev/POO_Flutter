@@ -165,14 +165,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     title: Text(
                       category.name,
                       style: const TextStyle(
-                        fontSize: 24.0,
+                        fontSize: 22.0,
                       ),
                     ),
                     subtitle: Text(
                       category.description.toString(),
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                      ),
                     ),
                   ),
                 );
