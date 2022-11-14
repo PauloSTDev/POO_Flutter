@@ -8,4 +8,5 @@ class ThemeColors {
     "Ouro 3" : Color.fromRGBO(254, 241, 85, 1.0),
     "Bronze 3" : Color.fromRGBO(191, 142, 0, 1.0),
   };
+  static const division = Colors.purple;
 }

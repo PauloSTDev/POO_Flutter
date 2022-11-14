@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:poo_flutter/components/content_division.dart";
 import "package:poo_flutter/screens/categories_screen.dart";
 import "package:poo_flutter/screens/home_screen.dart";
 import "package:poo_flutter/screens/todo_screen.dart";
@@ -34,6 +35,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TodoScreen()));
             },
           ),
+          const ContentDivision(),
           ListTile(
             title: const Text("Home"),
             leading: const Icon(Icons.home),
@@ -41,6 +43,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeScreen()));
             },
           ),
+          const ContentDivision(),
           ListTile(
             title: const Text("Categories"),
             leading: const Icon(Icons.category),
@@ -48,6 +51,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CategoriesScreen()));
             },
           ),
+          const ContentDivision(),
         ],
       ),
     );
