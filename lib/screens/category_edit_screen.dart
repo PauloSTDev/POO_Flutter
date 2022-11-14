@@ -21,6 +21,7 @@ class CategoryEditScreen extends StatefulWidget {
 
 class _CategoryEditScreenState extends State<CategoryEditScreen> {
 
+
   @override
   Widget build(BuildContext context) {
     final categoryNameController = TextEditingController(text: widget.name);
@@ -69,7 +70,9 @@ class _CategoryEditScreenState extends State<CategoryEditScreen> {
                           try {
                             await CategoryService()
                                 .update(updatedCategory)
-                                .catchError((onError) => showSnackBar("editar", context))
+                                .catchError(
+                                  (onError) => showSnackBar("editar", context),
+                                )
                                 .then((value) => ScaffoldMessenger.of(context)
                                         .showSnackBar(const SnackBar(
                                             content: Text(
