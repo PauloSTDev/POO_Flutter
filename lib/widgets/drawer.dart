@@ -27,7 +27,7 @@ class _DrawerNavigationState extends State<DrawerNavigation> {
             ),
           ),
           ListTile(
-            title: const Text("Home"),
+            title: const Text("Todo"),
             leading: const Icon(Icons.format_align_center),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TodoScreen()));
