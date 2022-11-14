@@ -164,9 +164,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         icon: const Icon(Icons.delete)),
                     title: Text(
                       category.name,
-                      style: const TextStyle(
-                        fontSize: 22.0,
-                      ),
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     subtitle: Text(
                       category.description.toString(),
