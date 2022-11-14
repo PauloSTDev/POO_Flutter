@@ -1,9 +1,11 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:poo_flutter/components/colors_dot.dart';
 import 'package:poo_flutter/database/dao/category_service.dart';
 import 'package:poo_flutter/models/category.dart';
 import 'package:poo_flutter/screens/category_edit_screen.dart';
 import 'package:poo_flutter/screens/home_screen.dart';
+import 'package:poo_flutter/themes/theme_colors.dart';
 import 'package:poo_flutter/widgets/show_snackbar.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -111,6 +113,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 final Category category = categories[index];
                 return Card(
                   child: ListTile(
+                    leading: ColorDot(color: ThemeColors.colorDotCategory[category.name]),
                     onTap: () {
                       Navigator.push(
                         context,
