@@ -1,7 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-
 Future<Database> connectionDB() async {
   var databasesPath = await getDatabasesPath();
   String tableSql =
