@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:poo_flutter/components/colors_dot.dart';
 import 'package:poo_flutter/database/dao/category_service.dart';
+import 'package:poo_flutter/database/task_database/dao/task_service.dart';
+import 'package:poo_flutter/models/task.dart';
 import 'package:poo_flutter/themes/theme_colors.dart';
 import 'package:intl/intl.dart';
 
@@ -23,6 +27,7 @@ class _TodoScreenState extends State<TodoScreen> {
     super.initState();
     _loadCategories();
   }
+
   _loadCategories() async {
     final categoryService = CategoryService();
     final categories = await categoryService.findAll();
@@ -34,7 +39,9 @@ class _TodoScreenState extends State<TodoScreen> {
             child: Row(
               children: [
                 ColorDot(color: ThemeColors.colorDotCategory[category.name]),
-                const SizedBox(width: 10,),
+                const SizedBox(
+                  width: 10,
+                ),
                 Text(category.name),
               ],
             ),
@@ -47,8 +54,12 @@ class _TodoScreenState extends State<TodoScreen> {
   DateTime _date = DateTime.now();
 
   _selectTodoDate(BuildContext context) async {
-    final pickedDate = await showDatePicker(context: context, initialDate: _date, firstDate: DateTime(2000), lastDate: DateTime(2099));
-    if (pickedDate != null){
+    final pickedDate = await showDatePicker(
+        context: context,
+        initialDate: _date,
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2099));
+    if (pickedDate != null) {
       _date = pickedDate;
       setState(() {
         _todoDate.text = DateFormat("yyyy-MM-dd").format(pickedDate);
@@ -74,8 +85,7 @@ class _TodoScreenState extends State<TodoScreen> {
             TextField(
               controller: _todoDescription,
               decoration: const InputDecoration(
-                  hintText: "Todo description",
-                  labelText: "Todo description"),
+                  hintText: "Todo description", labelText: "Todo description"),
             ),
             TextField(
               controller: _todoDate,
@@ -83,7 +93,7 @@ class _TodoScreenState extends State<TodoScreen> {
                   hintText: "YY-MM-DD",
                   labelText: "YY-MM-DD",
                   prefixIcon: InkWell(
-                    onTap: () => _selectTodoDate(context),
+                      onTap: () => _selectTodoDate(context),
                       child: const Icon(Icons.calendar_today))),
             ),
             DropdownButtonFormField(
@@ -98,11 +108,22 @@ class _TodoScreenState extends State<TodoScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: const Text("Cancel"),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    final task = Task(
+                        Random().nextInt(100),
+                        _todoTitle.text,
+                        _todoDescription.text,
+                        _selectedValue,
+                        _todoDate.text,
+                        0);
+                    TaskService().save(task).then((value) => Navigator.pop(context));
+                  },
                   child: const Text("Save"),
                 ),
               ],
