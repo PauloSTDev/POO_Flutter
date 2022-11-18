@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:poo_flutter/database/dao/category_service.dart';
+import 'package:poo_flutter/database/category_database/dao/category_service.dart';
 import 'package:poo_flutter/models/category.dart';
 import 'package:poo_flutter/widgets/show_snackbar.dart';
 

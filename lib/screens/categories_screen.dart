@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:poo_flutter/components/colors_dot.dart';
-import 'package:poo_flutter/database/dao/category_service.dart';
+import 'package:poo_flutter/database/category_database/dao/category_service.dart';
 import 'package:poo_flutter/models/category.dart';
 import 'package:poo_flutter/screens/category_edit_screen.dart';
 import 'package:poo_flutter/screens/home_screen.dart';

@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:poo_flutter/components/colors_dot.dart';
-import 'package:poo_flutter/database/dao/category_service.dart';
+import 'package:poo_flutter/database/category_database/dao/category_service.dart';
 import 'package:poo_flutter/database/task_database/dao/task_service.dart';
 import 'package:poo_flutter/models/task.dart';
 import 'package:poo_flutter/themes/theme_colors.dart';
