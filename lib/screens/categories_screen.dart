@@ -113,18 +113,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 final Category category = categories[index];
                 return Card(
                   child: ListTile(
-                    leading: ColorDot(color: ThemeColors.colorDotCategory[category.name]),
+                    leading: ColorDot(color: ThemeColors.colorDotCategoryAndTask[category.name]),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CategoryEditScreen(
-                              category: category,
-                              name: category.name,
-                              description: category.description,
-                          ),
-                        ),
-                      ).then((value) => setState(() {}));
+                      navigateAndUpdate(context, category)
+                      .then((value) => setState(() {}));
                     },
                     trailing: IconButton(
                         onPressed: () {
@@ -191,4 +183,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       ),
     );
   }
+}
+Future navigateAndUpdate(context, category) async{
+  await Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => CategoryEditScreen(
+        category: category,
+        name: category.name,
+        description: category.description,
+      ),
+    ),
+  );
 }

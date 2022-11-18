@@ -38,7 +38,7 @@ class _TodoScreenState extends State<TodoScreen> {
             value: category.name,
             child: Row(
               children: [
-                ColorDot(color: ThemeColors.colorDotCategory[category.name]),
+                ColorDot(color: ThemeColors.colorDotCategoryAndTask[category.name]),
                 const SizedBox(
                   width: 10,
                 ),
